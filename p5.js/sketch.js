@@ -179,17 +179,17 @@ function draw() {
     }
   }
 
-  // 아이콘 표시 (3초 동안 유지)
+  // 아이콘 표시 (2초 동안 유지)
   if (iconVisible && millis() < iconTimer) {
     textSize(64);
     textAlign(CENTER, CENTER);
     text(iconVisible, width / 2, height / 2); // 화면 중앙에 아이콘 표시
   } else {
-    iconVisible = ""; // 3초가 지나면 아이콘 숨기기
+    iconVisible = ""; // 2초가 지나면 아이콘 숨기기
   }
 }
 
-// 
+// 지우기 함수
 function eraser(hand, eraseMode) {
   if(eraseMode){
     painting.erase();
@@ -203,42 +203,42 @@ function eraser(hand, eraseMode) {
 }
     
 
-// 스페이스바를 누르면 그림을 지우는 기능
-function keyPressed() {
-  if (key === ' ') {
-    painting.clear(); // 그림 영역 초기화
-  }
-}
+// // 스페이스바를 누르면 그림을 지우는 기능
+// function keyPressed() {
+//   if (key === ' ') {
+//     painting.clear(); // 그림 영역 초기화
+//   }
+// }
 
-// 아이콘 표시 함수 (3초 동안 유지)
+// 아이콘 표시 함수 (2초 동안 유지)
 function icon(icon) {
   iconVisible = icon;
   iconTimer = millis() + 2000; // 현재 시간 + 2초
 }
 
-// 버튼 클래스
+// 버튼 클래스 정의
 class Button {
   constructor(x, y, w, h, label, onClick) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.label = label;
-    this.onClick = onClick;
+    this.x = x; // 버튼의 x 좌표
+    this.y = y; // 버튼의 y 좌표
+    this.w = w; // 버튼의 너비
+    this.h = h; // 버튼의 높이
+    this.label = label; // 버튼에 표시할 텍스트
+    this.onClick = onClick; // 버튼 클릭 시 실행할 함수
   }
 
   // 버튼을 화면에 그리는 함수
   display() {
-    fill(this.isHovered(mouseX, mouseY) ? 'lightgray' : 'white'); // 손가락이 버튼 위에 있으면 색 변경
+    fill(this.isHovered(mouseX, mouseY) ? 'lightgray' : 'white'); // 마우스가 버튼 위에 있으면 색 변경
     stroke(0);
-    rect(this.x, this.y, this.w, this.h, 10); // 버튼을 사각형으로 그리기
+    rect(this.x, this.y, this.w, this.h, 10); // 버튼을 사각형으로 그림
     fill(0);
     textSize(20);
     textAlign(CENTER, CENTER);
-    text(this.label, this.x + this.w / 2, this.y + this.h / 2); // 버튼 텍스트 표시
+    text(this.label, this.x + this.w / 2, this.y + this.h / 2); // 버튼 중앙에 텍스트 표시
   }
 
-  // 버튼 위에 마우스나 손가락이 올려졌는지 확인하는 함수
+  // 버튼 위에 마우스 커서가 있는지 확인하는 함수
   isHovered(px, py) {
     return (px > this.x) && (px < this.x + this.w) && (py > this.y) && (py < this.y + this.h);
   }
